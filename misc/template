@@ -1,0 +1,33 @@
+/*stOstOstOstOstOstO*/#include <bits/stdc++.h>/*OrzOrzOrzOrzOrzOrz*/
+			  #define fi first
+			 #define se  second
+			 #define name "zit"
+		       #define el cerr<<'\n';
+		       #define ub upper_bound
+		       #define lb lower_bound
+	    #define debug(x) cerr <<#x<< " = " <<x<<'\n'
+	    using ll=long long;using namespace std;ll n;
+	    using pll=pair<ll, ll>; using vl=vector<ll>;
+	    #define all(x, y) x.begin()+1, x.begin()+y+1
+	    #define RET return x=y,1;return 0//__   c: |
+	    #define pb push_back // zit#6421 <(o )_____|
+	    #define pii pair <int, int> //    (   ._> /|
+	    #define All(x) x.begin(),x.end()/* `-----'*/
+using vi=vector<int>;const ll M2=998244353,N=5e5+9,M=1e9+7,INF=1e18;
+#define ok cerr << "if u see this line , then ur code worked orz \n"
+template<class X,class Y>bool minimize (X&x,const Y&y){if(x>y) RET;}
+#define pr(orz) copy (orz,ostream_iterator<ll>(cerr," "));cerr<<'\n'
+template<class X,class Y>bool maximize (X&x,const Y&y){if(x<y) RET;}
+#define stop assert (0||!(cerr<<"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"));
+
+
+
+void sibidi () {              cin >> n;
+	
+	
+}                          signed main ()                          {
+		     if (fopen(name".inp","r"))
+  {freopen(name".inp","r",stdin); freopen(name".out","w",stdout);}
+  ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);ll _=1;
+			     //cin>>_;
+		   while (_--)sibidi();return 0;}
