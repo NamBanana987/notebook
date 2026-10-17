@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using cd = complex<double>;
+const double PI = acos(-1);
+
+// Usage:
+// Multiply two polynomials using FFT in O(n log n).
+// a[i] = coefficient of x^i in polynomial A.
+// b[i] = coefficient of x^i in polynomial B.
+//
+// Example:
+// A(x) = 1 + 2x + 3x^2  -> a = {1, 2, 3}
+// B(x) = 4 + 5x         -> b = {4, 5}
+//
+// vector<long long> c = multiply(a, b);
+// Output: c = {4, 13, 22, 15}
+// C(x) = A(x) * B(x) = 4 + 13x + 22x^2 + 15x^3
+//
+// Other applications:
+// - Calculate convolution of two arrays.
+// - Count pairs of values with each possible sum.
+// - Count ways to obtain each sum using two frequency arrays.
+//
+// Note: Floating-point precision errors may occur for large coefficients.
+void fft(vector<cd> &a, bool inv) {
+    int n = a.size();
+    for (int i = 1, j = 0; i < n; i++) {
+        int b = n >> 1;
+        for (; j & b; b >>= 1) j ^= b;
+        j ^= b;
+        if (i < j) swap(a[i], a[j]);
+    }
+    for (int len = 2; len <= n; len <<= 1) {
+        double ang = 2 * PI / len * (inv ? -1 : 1);
+        cd wlen(cos(ang), sin(ang));
+        for (int i = 0; i < n; i += len) {
+            cd w = 1;
+            for (int j = 0; j < len / 2; j++) {
+                cd u = a[i+j], v = a[i+j+len/2] * w;
+                a[i+j] = u + v;
+                a[i+j+len/2] = u - v;
+                w *= wlen;
+            }
+        }
+    }
+    if (inv)
+        for (cd &x : a) x /= n;
+}
+
+vector<long long> multiply(vector<long long> a, vector<long long> b) {
+    int n = 1;
+    while (n < (int)a.size() + (int)b.size() - 1) n <<= 1;
+    vector<cd> x(n), y(n);
+    for (int i = 0; i < (int)a.size(); i++) x[i] = a[i];
+    for (int i = 0; i < (int)b.size(); i++) y[i] = b[i];
+    fft(x, 0); fft(y, 0);
+    for (int i = 0; i < n; i++) x[i] *= y[i];
+    fft(x, 1);
+    vector<long long> c(a.size() + b.size() - 1);
+    for (int i = 0; i < (int)c.size(); i++)
+        c[i] = round(x[i].real());
+    return c;
+}
